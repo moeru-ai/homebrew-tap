@@ -10,14 +10,12 @@ class Auv < Formula
   # NOTICE: Homebrew loads tap formulae under Linux architecture contexts
   # during validation. Select the archive by CPU here; the macOS requirement
   # rejects Linux installation before it can use this URL.
-  # TODO(homebrew-release-update): Keep URL and checksum updates manual until
-  # an owner-approved stable-release workflow can verify both macOS archives.
   if Hardware::CPU.arm?
-    url "https://github.com/moeru-ai/auv/releases/download/v0.0.24/auv-aarch64-apple-darwin.tar.gz"
-    sha256 "bb842874f8b6513d14df279c2743054b003bfe8e68f8839ac1b3e814df56a3fe"
+    url "https://github.com/moeru-ai/auv/releases/download/v0.0.25/auv-aarch64-apple-darwin.tar.gz"
+    sha256 "888a8c84d023af466552116578a2a03fcc6b55aaf83ed69a145ff3c78cde0127"
   elsif Hardware::CPU.intel?
-    url "https://github.com/moeru-ai/auv/releases/download/v0.0.24/auv-x86_64-apple-darwin.tar.gz"
-    sha256 "592d74b8a893182f096c0ad7546f8ceeaddc44ed6786f23e0a12780de21fc571"
+    url "https://github.com/moeru-ai/auv/releases/download/v0.0.25/auv-x86_64-apple-darwin.tar.gz"
+    sha256 "11d086d5d55900853bb7c2e74e2f07c798f82407c29d6ec825bd9b0d03f13314"
   end
 
   def install
@@ -25,6 +23,6 @@ class Auv < Formula
   end
 
   test do
-    assert_equal "auv 0.0.24", shell_output("#{bin}/auv --version").strip
+    assert_equal "auv 0.0.25", shell_output("#{bin}/auv --version").strip
   end
 end

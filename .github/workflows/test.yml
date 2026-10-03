@@ -44,4 +44,5 @@ jobs:
         run: |
           brew install moeru-ai/tap/auv
           brew test moeru-ai/tap/auv
-          test "$(auv --version)" = "auv 0.0.24"
+          expected_version=$(brew info --json=v2 moeru-ai/tap/auv | jq -r '.formulae[0].versions.stable')
+          test "$(auv --version)" = "auv ${expected_version}"
