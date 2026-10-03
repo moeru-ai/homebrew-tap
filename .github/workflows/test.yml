@@ -1,0 +1,47 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  formula:
+    name: Formula (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15-intel
+            arch: x86_64
+          - runner: macos-26
+            arch: arm64
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Verify runner architecture
+        run: test "$(uname -m)" = "${{ matrix.arch }}"
+
+      - name: Add local tap
+        run: brew tap --custom-remote moeru-ai/tap "$GITHUB_WORKSPACE"
+
+      - name: Trust the AUV formula
+        run: brew trust --formula moeru-ai/tap/auv
+
+      - name: Check formula
+        run: |
+          brew style moeru-ai/tap
+          brew audit --strict --online moeru-ai/tap/auv
+
+      - name: Install and test AUV
+        run: |
+          brew install moeru-ai/tap/auv
+          brew test moeru-ai/tap/auv
+          test "$(auv --version)" = "auv 0.0.24"
