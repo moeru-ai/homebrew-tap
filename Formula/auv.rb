@@ -11,11 +11,11 @@ class Auv < Formula
   # during validation. Select the archive by CPU here; the macOS requirement
   # rejects Linux installation before it can use this URL.
   if Hardware::CPU.arm?
-    url "https://github.com/moeru-ai/auv/releases/download/v0.0.27/auv-aarch64-apple-darwin.tar.gz"
-    sha256 "451d19a6466ae9d4edbeb47bb920d04ee55e97c0c75d74961747464f600fbe41"
+    url "https://github.com/moeru-ai/auv/releases/download/v0.0.28/auv-aarch64-apple-darwin.tar.gz"
+    sha256 "53021e70d9356ad8add460930010be34d838a4f3eb425e59cd7651a74c9a6d0d"
   elsif Hardware::CPU.intel?
-    url "https://github.com/moeru-ai/auv/releases/download/v0.0.27/auv-x86_64-apple-darwin.tar.gz"
-    sha256 "ee2e928e4ea98dfec9c58ae694ddf7f2926bd541ebfffb1a0456c6cec3f5abac"
+    url "https://github.com/moeru-ai/auv/releases/download/v0.0.28/auv-x86_64-apple-darwin.tar.gz"
+    sha256 "0f24c9912c5aca6b1ae5d4de7391d4313d57a493adce02535be0b93e7079944c"
   end
 
   def install
@@ -23,6 +23,6 @@ class Auv < Formula
   end
 
   test do
-    assert_equal "auv 0.0.27", shell_output("#{bin}/auv --version").strip
+    assert_equal "auv 0.0.28", shell_output("#{bin}/auv --version").strip
   end
 end
